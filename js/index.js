@@ -110,7 +110,7 @@ window.addEventListener('DOMContentLoaded', () => {
   };
 
   // call the displayQuiz function
-  displayQuiz();
+   displayQuiz();
 });
 
 // count Down 
@@ -121,5 +121,5 @@ function myFunction() {
   let d = new Date();
   document.getElementById("time").innerHTML=
   d.getMinutes() + ":" +
-  d.getSeconds();
+  d.getSeconds(); 
 }
