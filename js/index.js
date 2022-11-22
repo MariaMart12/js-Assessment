@@ -25,6 +25,14 @@ window.addEventListener('DOMContentLoaded', () => {
     document.querySelector('#quizBlock').style.display = 'block';
     start.style.display = 'none';
   });
+
+  const btnSubmit = document.querySelector('#btnSubmit');
+  btnSubmit.addEventListener('click', function (e) {
+    document.querySelector('#quizBlock').style.display = 'block';
+    start.style.display = 'none';
+    calculateScore();
+  });
+  
   // quizArray QUESTIONS & ANSWERS
   // q = QUESTION, o = OPTIONS, a = CORRECT ANSWER
   // Basic ideas from https://code-boxx.com/simple-javascript-quiz/
@@ -44,6 +52,16 @@ window.addEventListener('DOMContentLoaded', () => {
       o: ['Sydney', 'Canberra', 'Melbourne', 'Perth'],
       a: 1,
     },
+    {
+      q: 'What is the capital of Greece',
+      o: ['Athens', 'Ankara', 'Nicosia', 'Thessaloniki'],
+      a: 0,
+    },
+    {
+      q: 'Antananarivo is the capital of ...',
+      o: ['Ethiopia', 'Madagascar', 'Zimbabwe', 'Mozambique'],
+      a: 1,
+    }
   ];
 
   // function to Display the quiz questions and answers from the object
@@ -63,28 +81,45 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   };
 
-  // Calculate the score
+  // Calculate the score 
+  
   const calculateScore = () => {
     let score = 0;
     quizArray.map((quizItem, index) => {
-      for (let i = 0; i < 4; i++) {
-        //highlight the li if it is the correct answer
-        let li = `li_${index}_${i}`;
-        let r = `radio_${index}_${i}`;
-        liElement = document.querySelector('#' + li);
-        radioElement = document.querySelector('#' + r);
+        for (let i = 0; i < 4; i++) {
+          //highlight the li if it is the correct answer
+          let li = `li_${index}_${i}`;
+          let r = `radio_${index}_${i}`;
+          let liElement = document.querySelector('#' + li);
+          let radioElement = document.querySelector('#' + r);
+          
+          if (quizItem.a == i) {
+            //change background color of li element here  
+            
+             liElement.style.backgroundColor = 'green';
+            
+          }
 
-        if (quizItem.a == i) {
-          //change background color of li element here
-        }
-
-        if (radioElement.checked) {
-          // code for task 1 goes here
-        }
+          if (quizItem.a == i) {
+            score = score++
+            // code for task 1 goes here
+          }
+        }        
       }
-    });
+    );
   };
 
   // call the displayQuiz function
   displayQuiz();
 });
+
+// count Down 
+
+
+setInterval(myFunction, 1000);
+function myFunction() {
+  let d = new Date();
+  document.getElementById("time").innerHTML=
+  d.getMinutes() + ":" +
+  d.getSeconds();
+}
